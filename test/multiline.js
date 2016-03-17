@@ -15,9 +15,9 @@ var collapse = [
     ].join('\n'),
 
     expected: [
-      'var x = 1',
+      'var x = 1;',
       '',
-      'var z = 2',
+      'var z = 2;',
       ''
     ].join('\n'),
 
@@ -32,9 +32,9 @@ var collapse = [
     ].join('\n'),
 
     expected: [
-      'var x = 1',
+      'var x = 1;',
       '',
-      'var z = 2', ''
+      'var z = 2;', ''
     ].join('\n'),
 
     msg: 'ten empty lines should collapse to one'
@@ -50,8 +50,8 @@ var collapse = [
 
     expected: [
       'var foo = function () {',
-      '  bar()',
-      '}',
+      '  bar();',
+      '};',
       ''
     ].join('\n'),
 
@@ -65,12 +65,12 @@ var collapse = [
     ].join('\n'),
 
     expected: [
-      'var x = 123 /* Useful comment ',
+      'var x = 123; /* Useful comment ',
       'that spans two lines */',
       ''
     ].join('\n'),
 
-    msg: 'Keep semicolon from multiline comment'
+    msg: 'Don\'t Remove semicolon from multiline comment'
   }
 ]
 
@@ -93,9 +93,9 @@ test('multiline collapse CRLF', function (t) {
 var noops = [
   {
     program: [
-      'var x = 1',
+      'var x = 1;',
       '',
-      'var z = 2',
+      'var z = 2;',
       ''
     ].join('\n'),
 
@@ -109,8 +109,8 @@ var noops = [
       '    json: true,',
       '    headers: headers',
       '  }, function (err, resp, body) {',
-      '    cb(err, resp, body)',
-      '  })',
+      '    cb(err, resp, body);',
+      '  });',
       '}',
       ''
     ].join('\n'),
@@ -124,7 +124,7 @@ var noops = [
       "  'standard': {",
       "    'ignore': ['test.js', '**test/failing/**']",
       '  }',
-      '}',
+      '};',
       ''
     ].join('\n'),
 
@@ -133,8 +133,8 @@ var noops = [
   {
     program: [
       '/*global localStorage*/',
-      ';(function () { // IIFE to ensure no global leakage!',
-      '}())',
+      '(function () { // IIFE to ensure no global leakage!',
+      '}());',
       ''
     ].join('\n'),
 
@@ -142,10 +142,10 @@ var noops = [
   },
   {
     program: [
-      "console.log('meh')",
-      ';(function a () {',
-      "  console.log('hiya')",
-      '}())',
+      "console.log('meh');",
+      '(function a () {',
+      "  console.log('hiya');",
+      '}());',
       ''
     ].join('\n'),
 
@@ -182,13 +182,13 @@ var semicolons = [
     ].join('\n'),
 
     expected: [
-      'var x = 2',
-      ';[1, 2, 3].map(function () {})',
+      'var x = 2;',
+      '[1, 2, 3].map(function () {});',
       '',
-      'var y = 8',
-      ';(function () {',
-      '  bar()',
-      '}())',
+      'var y = 8;',
+      '(function () {',
+      '  bar();',
+      '}());',
       ''
     ].join('\n'),
 
@@ -204,10 +204,10 @@ var semicolons = [
     ].join('\n'),
 
     expected: [
-      "console.log('meh')",
-      ';(function a () {',
-      "  console.log('hiya')",
-      '}())',
+      "console.log('meh');",
+      '(function a () {',
+      "  console.log('hiya');",
+      '}());',
       ''
     ].join('\n'),
 
