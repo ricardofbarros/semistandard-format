@@ -1,7 +1,7 @@
 var path = require('path')
 var fs = require('fs')
 var fmt = require('../').transform
-var standard = require('standard')
+var standard = require('semistandard')
 var inspect = require('util').inspect
 
 function testFile (filePath, depth) {

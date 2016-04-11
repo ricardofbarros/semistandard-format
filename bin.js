@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 
 var fmt = require('./')
+var load = require('standard-format').load
 var fs = require('fs')
 var stdin = require('stdin')
 var argv = require('minimist')(process.argv.slice(2), {
@@ -12,7 +13,7 @@ var argv = require('minimist')(process.argv.slice(2), {
   }
 })
 
-// running `standard-format -` is equivalent to `standard-format --stdin`
+// running `semistandard-format -` is equivalent to `semistandard-format --stdin`
 if (argv._[0] === '-') {
   argv.stdin = true
   argv._.shift()
@@ -21,10 +22,10 @@ if (argv._[0] === '-') {
 if (argv.help) {
   console.log(function () {
   /*
-  standard-format - Auto formatter for the easier cases in standard
+  semistandard-format - Auto formatter for the easier cases in standard
 
   Usage:
-      standard-format <flags> [FILES...]
+      semistandard-format <flags> [FILES...]
 
       If FILES is omitted, then all JavaScript source files (*.js) in the current
       working directory are checked, recursively.
@@ -37,7 +38,7 @@ if (argv.help) {
       -w  --write     Directly modify input files.
       -h, --help      Show usage information.
 
-  Readme:  https://github.com/maxogden/standard-format
+  Readme:  https://github.com/maxogden/semistandard-format
 
   */
   }.toString().split(/\n/).slice(2, -2).join('\n'))
@@ -64,7 +65,7 @@ function getFiles (done) {
       return done(null, [{ name: 'stdin', data: file }])
     })
   } else if (args.length === 0) {
-    return fmt.load(done)
+    return load(done)
   } else {
     return done(null, args.map(function (file) {
       return { name: file, data: fs.readFileSync(file).toString() }
