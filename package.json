@@ -1,6 +1,6 @@
 {
   "name": "semistandard-format",
-  "version": "2.1.1",
+  "version": "3.0.0",
   "description": "attempts to reformat javascript to comply with feross/standard style but with semicolons",
   "main": "index.js",
   "bin": "./bin.js",
@@ -29,6 +29,7 @@
     "concat-stream": "^1.4.7",
     "debug": "^2.1.1",
     "once": "^1.3.1",
+    "pre-commit": "^1.1.2",
     "semistandard": "^7.0.5",
     "skip-stream": "0.0.3",
     "snazzy": "^2.0.1",
@@ -43,5 +44,8 @@
       "**test/test-files/**",
       "**test/failing/**"
     ]
-  }
+  },
+  "pre-commit": [
+    "test"
+  ]
 }
