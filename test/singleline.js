@@ -3,20 +3,20 @@ var fmt = require('../').transform
 
 var noops = [
   {
-    str: 'if (!opts) opts = {}\n',
+    str: 'if (!opts) opts = {};\n',
     msg: 'Noop on single line conditional assignment'
   },
 
   {
-    str: 'var g = { name: f, data: fs.readFileSync(f).toString() }\n',
+    str: 'var g = { name: f, data: fs.readFileSync(f).toString() };\n',
     msg: 'Noop on single line object assignment'
   },
   {
-    str: "{foo: 'bar'}\n",
+    str: "var x = {foo: 'bar'};\n",
     msg: 'Dont add padding to object braces'
   },
   {
-    str: "var x = ['test.js', '**test/failing/**']\n",
+    str: "var x = ['test.js', '**test/failing/**'];\n",
     msg: 'Noop on singleline arrays'
   },
   {
@@ -24,15 +24,15 @@ var noops = [
     msg: 'Noop on named functions correctly spaced'
   },
   {
-    str: 'window.wrapFunctionsUntil(1)\n',
+    str: 'window.wrapFunctionsUntil(1);\n',
     msg: 'Noop non-functions with function in the name'
   },
   {
-    str: "import * as lib from 'lib'\n",
+    str: "import * as lib from 'lib';\n",
     msg: 'Noop ES2015 import'
   },
   {
-    str: 'function * blarg (foo) {yield foo}\n',
+    str: 'function * blarg (foo) {yield foo;}\n',
     msg: 'Noop ES2015 generator'
   },
   {
@@ -40,12 +40,12 @@ var noops = [
     msg: 'Noop infix'
   },
   {
-    str: 'test[0]\ntest\n',
+    str: 'test[0];\ntest;\n',
     msg: 'allow newline after member accessor',
     issues: ['https://github.com/maxogden/standard-format/pull/93']
   },
   {
-    str: 'test(test[0])\n',
+    str: 'test(test[0]);\n',
     msg: "don't force newline on mid-expression member accessor",
     issues: ['https://github.com/maxogden/standard-format/pull/93']
   },
@@ -84,7 +84,7 @@ var transforms = [
     msg: 'Named function spacing between arguments and opening brace'
   },
   {
-    str: 'var     hi =    1;\n',
+    str: 'var     hi =    1\n',
     expect: 'var hi = 1;\n',
     msg: 'Squash spaces around variable value'
   },
@@ -111,7 +111,7 @@ var transforms = [
   {
     str: 'var x = 1\n',
     expect: 'var x = 1;\n',
-    msg: 'Use semicolons'
+    msg: 'Add semicolons'
   },
   {
     str: 'var x = {key:123};\n',
@@ -134,8 +134,8 @@ var transforms = [
     msg: 'Remove spaces inside conditional'
   },
   {
-    str: 'var condition = ( x === y )\n',
-    expect: 'var condition = (x === y)\n',
+    str: 'var condition = ( x === y );\n',
+    expect: 'var condition = (x === y);\n',
     msg: 'Remove spaces inside expression parentheses'
   },
   {
@@ -144,14 +144,14 @@ var transforms = [
     msg: 'Remove spaces inside parameter list parentheses'
   },
   {
-    str: 'var x = 123; // Useful comment\n',
-    expect: 'var x = 123 // Useful comment\n',
-    msg: 'Remove unneeded trailing semicolons that are followed by a comment'
+    str: 'var x = 123 // Useful comment\n',
+    expect: 'var x = 123; // Useful comment\n',
+    msg: 'Add trailing semicolons that are followed by a comment'
   },
   {
     str: 'var x = 123 /* Useful comment */\n',
     expect: 'var x = 123; /* Useful comment */\n',
-    msg: 'Add trailing semicolons that are followed by a multiline comment'
+    msg: 'Add unneeded trailing semicolons that are followed by a multiline comment'
   },
   {
     str: 'console.log(1===2?3:4);\n',

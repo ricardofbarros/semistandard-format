@@ -6,14 +6,14 @@ var classes = [
     program: [
       'export class com extends Component {',
       '  render() {}',
-      '}',
+      '};',
       ''
     ].join('\n'),
 
     expected: [
       'export class com extends Component {',
       '  render () {}',
-      '}',
+      '};',
       ''
     ].join('\n'),
 
@@ -30,7 +30,7 @@ var classes = [
       'array.map(el => ({',
       'inc: el.val + 1,',
       'dec: el.val - 1',
-      '}))',
+      '}));',
       ''
     ].join('\n'),
 
@@ -38,7 +38,7 @@ var classes = [
       'array.map(el => ({',
       '  inc: el.val + 1,',
       '  dec: el.val - 1',
-      '}))',
+      '}));',
       ''
     ].join('\n'),
 
